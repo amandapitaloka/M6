@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Percobaan GeoJSON</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LIfWPgU04xyl=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="map" style="width:900px; height:580px;"></div>
+
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([-7.772, 110.378], 15);
+
+        // Load a tile layer from OpenStreetMap with HTTPS
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Load GeoJSON from an external file
+        $.getJSON("https://raw.githubusercontent.com/luluksabdubusoroh/SIG/main/jalan.json")
+            .done(function(data) {
+                // Add GeoJSON layer to the map once the file is loaded
+                L.geoJson(data, {
+                    onEachFeature: function(feature, layer) {
+                        // Bind a popup to each feature
+                        layer.bindPopup("Kompleks kampus UGM.");
+                    }
+                }).addTo(map);
+            })
+            .fail(function(jqxhr, textStatus, error) {
+                // Handle errors in loading the GeoJSON file
+                console.error("Error loading GeoJSON: ", textStatus, error);
+            });
+    </script>
+</body>
+</html>
