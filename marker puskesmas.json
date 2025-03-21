@@ -4,6 +4,8 @@
       {
         "type": "Feature",
         "properties": {},
+          "nama": "Puskesmas Gondokusuman 2",
+          "lokasi": "Gondokusuman",
         "geometry": {
           "coordinates": [
             110.37100230153658,
