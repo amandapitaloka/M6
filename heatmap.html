@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Leaflet Map with Heatmap </title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+</head>
+<body>
+<p> Persebaran gempa di new zealand selaman periode juli-agustus 2013 </p>
+<div id="map" style="width: 600px; height: 800px"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+<script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js">
+    </script>
+
+<script src="C:/ASDOS/M6/2013-earthquake.json"></script>
+
+<script>
+
+var map = L.map('map').setView([-41.5546,174.146], 10);
+mapLink = 
+'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+L.tileLayer(
+'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: '&copy; ' + mapLink + ' Contributors',
+maxZoom: 18,
+}).addTo(map);
+
+var heat = L.heatLayer(quakePoints,{
+radius: 20,
+blur: 13, 
+maxZoom: 17,
+}).addTo(map);
+				
+    </script>
+</body>
+</html>
